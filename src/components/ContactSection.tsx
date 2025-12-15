@@ -90,60 +90,61 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact-me" className="py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 overflow-hidden rounded-2xl">
-          <div className="bg-muted p-6 md:p-8 lg:p-12 space-y-8">
+    <section id="contact-me" className="py-14 sm:py-16 md:py-20 bg-background">
+      <div className="container mx-auto px-2 sm:px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden rounded-2xl shadow-lg">
+          {/* Contact Info */}
+          <div className="bg-muted p-4 sm:p-6 md:p-8 lg:p-12 space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1 sm:mb-2">
                 Contact Information
               </h3>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-xs sm:text-sm">
                 Let’s build something impactful together.
               </p>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <Phone className="text-primary" size={20} />
-                <span className="text-muted-foreground italic">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Phone className="text-primary" size={18} />
+                <span className="text-muted-foreground italic text-xs sm:text-sm">
                   +91 96720 48846
                 </span>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Mail className="text-primary" size={20} />
-                <span className="text-foreground">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Mail className="text-primary" size={18} />
+                <span className="text-foreground text-xs sm:text-sm break-all">
                   kushagraagrawal.9672@gmail.com
                 </span>
               </div>
 
-              <div className="flex items-start gap-4">
-                <MapPin className="text-primary" size={20} />
-                <span className="text-foreground text-sm">
+              <div className="flex items-start gap-2 sm:gap-4">
+                <MapPin className="text-primary" size={18} />
+                <span className="text-foreground text-xs sm:text-sm">
                   Jalandhar City, Punjab, India
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 pt-8">
+            <div className="flex items-center gap-3 sm:gap-4 pt-6 sm:pt-8">
               {info.map(([image, link, name], i) => (
                 <a
                   key={i}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-2 group"
+                  className="flex flex-col items-center gap-1 sm:gap-2 group"
                 >
-                  <div className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:bg-primary/10">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:bg-primary/10">
                     <img
                       src={image as string}
                       alt={name as string}
-                      className="w-8 h-8 object-contain rounded-full"
+                      className="w-6 h-6 sm:w-8 sm:h-8 object-contain rounded-full"
                     />
                   </div>
 
-                  <span className="text-white italic text-sm opacity-80 group-hover:opacity-100 transition">
+                  <span className="text-white italic text-xs sm:text-sm opacity-80 group-hover:opacity-100 transition">
                     {name}
                   </span>
                 </a>
@@ -151,59 +152,68 @@ const ContactSection = () => {
             </div>
           </div>
 
-          <div className="bg-light-gray p-6 md:p-8 lg:p-12">
-            <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+          {/* Contact Form */}
+          <div className="bg-light-gray p-4 sm:p-6 md:p-8 lg:p-12">
+            <form
+              ref={formRef}
+              onSubmit={sendEmail}
+              className="space-y-4 sm:space-y-6"
+            >
               <div>
-                <label className="text-muted text-sm mb-2 block">Name</label>
+                <label className="text-muted text-xs sm:text-sm mb-1 sm:mb-2 block">
+                  Name
+                </label>
                 <Input
                   name="user_name"
                   required
                   placeholder="Your name"
-                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary"
+                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary text-xs sm:text-sm h-8 sm:h-10"
                 />
               </div>
 
               <div>
-                <label className="text-muted text-sm mb-2 block">Email</label>
+                <label className="text-muted text-xs sm:text-sm mb-1 sm:mb-2 block">
+                  Email
+                </label>
                 <Input
                   type="email"
                   name="user_email"
                   required
-                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary"
+                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary text-xs sm:text-sm h-8 sm:h-10"
                 />
               </div>
 
               <div>
-                <label className="text-muted text-sm mb-2 block">
+                <label className="text-muted text-xs sm:text-sm mb-1 sm:mb-2 block">
                   Phone Number (Optional)
                 </label>
                 <Input
                   name="user_phone"
                   placeholder="+91 XXXXX XXXXX"
-                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary"
+                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary text-xs sm:text-sm h-8 sm:h-10"
                 />
               </div>
 
               <div>
-                <label className="text-muted text-sm mb-4 block">
+                <label className="text-muted text-xs sm:text-sm mb-2 block">
                   Select Subject?
                 </label>
-                <div className="flex flex-wrap gap-4 md:gap-6">
+                <div className="flex flex-wrap gap-2 sm:gap-4 md:gap-6">
                   {[
                     "AI / ML Project",
                     "Full-Stack Development",
                     "Startup / SaaS",
                     "Freelance / Collaboration",
                   ].map((subject, i) => (
-                    <label key={i} className="flex items-center gap-2">
+                    <label key={i} className="flex items-center gap-1 sm:gap-2">
                       <input
                         type="radio"
                         name="user_subject"
                         value={subject}
                         defaultChecked={i === 0}
-                        className="w-4 h-4 accent-primary"
+                        className="w-3 h-3 sm:w-4 sm:h-4 accent-primary"
                       />
-                      <span className="text-muted text-xs md:text-sm">
+                      <span className="text-muted text-[10px] sm:text-xs md:text-sm">
                         {subject}
                       </span>
                     </label>
@@ -212,37 +222,40 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="text-muted text-sm mb-2 block">Message</label>
+                <label className="text-muted text-xs sm:text-sm mb-1 sm:mb-2 block">
+                  Message
+                </label>
                 <Textarea
                   name="message"
                   required
                   placeholder="Write your message.."
-                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 resize-none focus-visible:ring-0 focus-visible:border-primary"
+                  className="bg-transparent border-0 border-b border-muted rounded-none px-0 resize-none focus-visible:ring-0 focus-visible:border-primary text-xs sm:text-sm min-h-[60px] sm:min-h-[80px]"
                   rows={3}
                 />
-                {/* Hidden fields removed: all values are now included in the message body */}
               </div>
 
-              <div className="flex justify-end pt-4">
+              <div className="flex justify-end pt-2 sm:pt-4">
                 <Button
                   type="submit"
                   disabled={sending}
-                  className="bg-muted hover:bg-primary hover:text-primary-foreground px-8 py-3 transition-all hover:scale-105"
+                  className="bg-muted hover:bg-primary hover:text-primary-foreground px-5 sm:px-8 py-2 sm:py-3 transition-all hover:scale-105 text-xs sm:text-sm"
                 >
                   {sending ? "Sending..." : "Send Message"}
                 </Button>
               </div>
-              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+              {error && (
+                <p className="text-red-500 text-xs sm:text-sm mt-2">{error}</p>
+              )}
               {success && (
-                <p className="text-green-600 text-sm mt-2">
+                <p className="text-green-600 text-xs sm:text-sm mt-2">
                   Message sent successfully!
                 </p>
               )}
             </form>
 
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-2 sm:mt-4">
               <svg
-                className="w-12 h-12 text-muted-foreground animate-pulse"
+                className="w-8 h-8 sm:w-12 sm:h-12 text-muted-foreground animate-pulse"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
