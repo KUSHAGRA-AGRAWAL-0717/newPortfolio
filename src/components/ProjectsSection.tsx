@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const projects = [
   {
@@ -13,7 +13,6 @@ const projects = [
       "https://drive.google.com/file/d/1-Xw-yVQKy8ghiDfYFo-KHn6CX-QMgXRj/preview",
     startDate: "Feb 2025",
     endDate: "Mar 2025",
-    startTime: 0,
   },
   {
     name: "Tomato Disease Classifier",
@@ -25,7 +24,6 @@ const projects = [
       "https://drive.google.com/file/d/1-Xw-yVQKy8ghiDfYFo-KHn6CX-QMgXRj/preview",
     startDate: "Jan 2025",
     endDate: "Feb 2025",
-    startTime: 85,
   },
   {
     name: "Mail Master",
@@ -37,7 +35,6 @@ const projects = [
       "https://drive.google.com/file/d/1IQpjvHysibnD7rTzYZfNbp4-LhMZQxnu/preview",
     startDate: "Nov 2024",
     endDate: "Dec 2024",
-    startTime: 0,
   },
   {
     name: "Face Recognition System",
@@ -49,28 +46,29 @@ const projects = [
       "https://drive.google.com/file/d/1-Xw-yVQKy8ghiDfYFo-KHn6CX-QMgXRj/preview",
     startDate: "Sep 2024",
     endDate: "Oct 2024",
-    startTime: 160,
+  },
+  {
+    name: "AI-Driven Bulk Document Upload Automation",
+    description:
+      "End-to-end automation for bulk document uploads with AI metadata generation and browser-level automation.",
+    techStack: "n8n | Playwright | Node.js | OpenAI API",
+    codeUrl:
+      "https://drive.google.com/file/d/1RgX0OZPJLWll5XVATPKKgurLbMSBPCBH/view?usp=sharing",
+    demoUrl:
+      "https://drive.google.com/file/d/1g0gXs44B6R1KMWLNvCcMbGN7n_Gsjhu_/preview",
+    startDate: "1 December 2025",
+    endDate: "4 December 2025",
   },
 ];
 
 const ProjectsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [videoSrc, setVideoSrc] = useState(
-    `${projects[0].demoUrl}?start=${projects[0].startTime}`
-  );
 
-  useEffect(() => {
-    const project = projects[currentIndex];
-    setVideoSrc(`${project.demoUrl}?start=${project.startTime}`);
-  }, [currentIndex]);
-
-  const nextProject = () => {
+  const nextProject = () =>
     setCurrentIndex((prev) => (prev + 1) % projects.length);
-  };
 
-  const prevProject = () => {
+  const prevProject = () =>
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
-  };
 
   const currentProject = projects[currentIndex];
 
@@ -80,29 +78,23 @@ const ProjectsSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
             <div className="flex justify-center">
-              <span className="bg-maroon text-foreground px-8 py-3 rounded-full text-sm font-medium hover:bg-maroon-dark transition-all">
+              <span className="bg-maroon text-foreground px-8 py-3 rounded-full text-sm font-medium">
                 {currentProject.name}
               </span>
             </div>
 
             <div className="flex items-center gap-4">
-              <button
-                onClick={prevProject}
-                className="text-muted-foreground hover:text-primary hover:scale-110 transition-all"
-              >
+              <button onClick={prevProject}>
                 <ChevronLeft size={40} />
               </button>
 
-              <div className="flex-1 border-2 border-muted-foreground rounded-lg p-8 min-h-[220px] flex items-center justify-center hover:border-primary transition-all">
+              <div className="flex-1 border-2 rounded-lg p-8 min-h-[220px] flex items-center justify-center">
                 <p className="text-muted-foreground text-center">
                   {currentProject.description}
                 </p>
               </div>
 
-              <button
-                onClick={nextProject}
-                className="text-muted-foreground hover:text-primary hover:scale-110 transition-all"
-              >
+              <button onClick={nextProject}>
                 <ChevronRight size={40} />
               </button>
             </div>
@@ -112,34 +104,34 @@ const ProjectsSection = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
+                  className={`w-3 h-3 rounded-full ${
                     index === currentIndex
-                      ? "bg-primary scale-125"
-                      : "bg-muted-foreground hover:bg-primary/50"
+                      ? "bg-primary"
+                      : "bg-muted-foreground"
                   }`}
                 />
               ))}
             </div>
 
             <div className="flex justify-center">
-              <span className="border border-muted-foreground text-muted-foreground px-6 py-2 rounded-full text-sm italic">
+              <span className="border px-6 py-2 rounded-full text-sm italic">
                 {currentProject.startDate} – {currentProject.endDate}
               </span>
             </div>
           </div>
 
           <div className="space-y-6">
-            <div className="w-3/4 h-64 border-2 border-muted-foreground rounded-lg overflow-hidden hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20 transition-all">
+            <div className="w-3/4 h-64 border-2 rounded-lg overflow-hidden">
               <iframe
-                src={videoSrc}
+                src={currentProject.demoUrl}
                 className="w-full h-full"
-                allow="encrypted-media"
+                allow="autoplay; encrypted-media"
                 allowFullScreen
               />
             </div>
 
-            <div className="space-y-2">
-              <h3 className="text-foreground font-semibold text-lg">
+            <div>
+              <h3 className="font-semibold text-lg">
                 {currentProject.name}
               </h3>
               <p className="text-muted-foreground text-sm">
@@ -150,14 +142,12 @@ const ProjectsSection = () => {
             <div className="flex gap-4">
               <Button
                 variant="outline"
-                className="border-muted-foreground hover:bg-muted hover:scale-105 transition-all px-8"
                 onClick={() => window.open(currentProject.codeUrl, "_blank")}
               >
                 Code
               </Button>
               <Button
                 variant="outline"
-                className="border-muted-foreground hover:bg-muted hover:scale-105 transition-all px-8"
                 onClick={() => window.open(currentProject.demoUrl, "_blank")}
               >
                 Demo
