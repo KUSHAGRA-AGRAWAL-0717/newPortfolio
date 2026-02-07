@@ -2,18 +2,59 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const projects = [
+type PreviewType = "video" | "image" | "live";
+
+interface Project {
+  name: string;
+  description: string;
+  techStack: string;
+  codeUrl: string;
+  demoUrl: string;
+  previewType: PreviewType;
+  startDate: string;
+  endDate: string;
+}
+
+const projects: Project[] = [
+  {
+    name: "OutrankPilot",
+    description:
+      "AI-powered SEO SaaS platform with LLM-driven keyword research, SERP analysis, content planning, and auto-publishing workflows. Built with scalable backend architecture supporting high concurrency and subscription-based access.",
+    techStack:
+      "Vite | TypeScript | FastAPI | Supabase | Redis | LLMs | Google Analytics | Paystack",
+    codeUrl: "https://github.com/KUSHAGRA-AGRAWAL-0717",
+    demoUrl: "https://outrankpilot.com/",
+    previewType: "live",
+    startDate: "Jan 2026",
+    endDate: "Jan 2026",
+  },
+
+  {
+    name: "Kubernetes MP3 Converter",
+    description:
+      "Microservices-based MP3 converter using JWT auth, API Gateway, RabbitMQ async pipeline, MongoDB GridFS, and Kubernetes with NGINX Ingress.",
+    techStack:
+      "FastAPI | JWT | RabbitMQ | MongoDB GridFS | Docker | Kubernetes | NGINX",
+    codeUrl: "https://github.com/KUSHAGRA-AGRAWAL-0717/kubernetes-rabbitMq",
+    demoUrl: "/images/k8s-mp3-architecture.png.png", // ✅ CORRECT
+    previewType: "image",
+    startDate: "Feb 2026",
+    endDate: "Feb 2026",
+  },
+
   {
     name: "AutoPitch",
     description:
-      "Cold-email automation engine built using LLaMA 3 and LangChain with vector-based personalization, improving outreach relevance and achieving 90% skill-match accuracy.",
+      "Cold-email automation engine built using LLaMA 3 and LangChain with vector-based personalization.",
     techStack: "LangChain | LLaMA 3 | Vector DB",
     codeUrl: "https://github.com/KUSHAGRA-AGRAWAL-0717/AutoPitch",
     demoUrl:
       "https://drive.google.com/file/d/1-Xw-yVQKy8ghiDfYFo-KHn6CX-QMgXRj/preview",
+    previewType: "video",
     startDate: "Feb 2025",
     endDate: "Mar 2025",
   },
+
   {
     name: "Tomato Disease Classifier",
     description:
@@ -22,9 +63,11 @@ const projects = [
     codeUrl: "https://github.com/KUSHAGRA-AGRAWAL-0717/Tomato-disease-detector",
     demoUrl:
       "https://drive.google.com/file/d/1-Xw-yVQKy8ghiDfYFo-KHn6CX-QMgXRj/preview",
+    previewType: "video",
     startDate: "Jan 2025",
     endDate: "Feb 2025",
   },
+
   {
     name: "Mail Master",
     description:
@@ -33,9 +76,11 @@ const projects = [
     codeUrl: "https://github.com/KUSHAGRA-AGRAWAL-0717/mailMaster",
     demoUrl:
       "https://drive.google.com/file/d/1IQpjvHysibnD7rTzYZfNbp4-LhMZQxnu/preview",
+    previewType: "video",
     startDate: "Nov 2024",
     endDate: "Dec 2024",
   },
+
   {
     name: "Face Recognition System",
     description:
@@ -44,20 +89,9 @@ const projects = [
     codeUrl: "https://github.com/KUSHAGRA-AGRAWAL-0717/Face_recognition_system",
     demoUrl:
       "https://drive.google.com/file/d/1-Xw-yVQKy8ghiDfYFo-KHn6CX-QMgXRj/preview",
+    previewType: "video",
     startDate: "Sep 2024",
     endDate: "Oct 2024",
-  },
-  {
-    name: "AI-Driven Bulk Document Upload Automation",
-    description:
-      "End-to-end automation for bulk document uploads with AI metadata generation and browser-level automation.",
-    techStack: "n8n | Playwright | Node.js | OpenAI API",
-    codeUrl:
-      "https://drive.google.com/file/d/1RgX0OZPJLWll5XVATPKKgurLbMSBPCBH/view?usp=sharing",
-    demoUrl:
-      "https://drive.google.com/file/d/1g0gXs44B6R1KMWLNvCcMbGN7n_Gsjhu_/preview",
-    startDate: "1 December 2025",
-    endDate: "4 December 2025",
   },
 ];
 
@@ -76,6 +110,7 @@ const ProjectsSection = () => {
     <section id="portfolio" className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* LEFT */}
           <div className="space-y-6">
             <div className="flex justify-center">
               <span className="bg-maroon text-foreground px-8 py-3 rounded-full text-sm font-medium">
@@ -120,20 +155,44 @@ const ProjectsSection = () => {
             </div>
           </div>
 
+          {/* RIGHT */}
           <div className="space-y-6">
-            <div className="w-3/4 h-64 border-2 rounded-lg overflow-hidden">
-              <iframe
-                src={currentProject.demoUrl}
-                className="w-full h-full"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-              />
+            <div className="w-3/4 h-64 border-2 rounded-lg overflow-hidden flex items-center justify-center bg-muted">
+              {currentProject.previewType === "video" && (
+                <iframe
+                  src={currentProject.demoUrl}
+                  className="w-full h-full"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                />
+              )}
+
+              {currentProject.previewType === "image" && (
+                <img
+                  src={currentProject.demoUrl}
+                  alt={currentProject.name}
+                  className="w-full h-full object-cover"
+                />
+              )}
+
+              {currentProject.previewType === "live" && (
+                <div className="text-center space-y-3">
+                  <p className="text-muted-foreground text-sm">
+                    Live Production Website
+                  </p>
+                  <Button
+                    onClick={() =>
+                      window.open(currentProject.demoUrl, "_blank")
+                    }
+                  >
+                    Visit Website
+                  </Button>
+                </div>
+              )}
             </div>
 
             <div>
-              <h3 className="font-semibold text-lg">
-                {currentProject.name}
-              </h3>
+              <h3 className="font-semibold text-lg">{currentProject.name}</h3>
               <p className="text-muted-foreground text-sm">
                 Tech Stack : {currentProject.techStack}
               </p>
@@ -146,6 +205,7 @@ const ProjectsSection = () => {
               >
                 Code
               </Button>
+
               <Button
                 variant="outline"
                 onClick={() => window.open(currentProject.demoUrl, "_blank")}
